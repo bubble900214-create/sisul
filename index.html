@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>경록's 시설 업무</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+  background:#f5f7fa;
+  color:#1f2937;
+}
+
+header{
+  background:linear-gradient(135deg,#17365d,#245a91);
+  color:white;
+  padding:42px 20px 52px;
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+}
+
+h1{
+  margin:0 0 8px;
+  font-size:36px;
+}
+
+.subtitle{
+  margin:0;
+  opacity:.9;
+  font-size:16px;
+}
+
+.search-wrap{
+  max-width:760px;
+  margin:30px auto -76px;
+}
+
+#search{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:19px 22px;
+  font-size:17px;
+  box-shadow:0 8px 28px rgba(0,0,0,.18);
+  outline:none;
+}
+
+main{
+  max-width:1200px;
+  margin:75px auto 60px;
+  padding:0 20px;
+}
+
+.section-title{
+  font-size:22px;
+  font-weight:700;
+  margin:30px 0 16px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.card{
+  background:white;
+  border-radius:14px;
+  padding:22px;
+  border:1px solid #e5e7eb;
+  transition:.18s;
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+
+.icon{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.card h2{
+  font-size:19px;
+  margin:0 0 10px;
+}
+
+.card p{
+  margin:0;
+  color:#667085;
+  line-height:1.65;
+  font-size:14px;
+}
+
+.tag{
+  display:inline-block;
+  background:#eef4fb;
+  color:#245a91;
+  border-radius:20px;
+  padding:5px 9px;
+  margin:12px 4px 0 0;
+  font-size:12px;
+}
+
+.update-box{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:20px 24px;
+}
+
+.update{
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+}
+
+.update:last-child{
+  border-bottom:0;
+}
+
+.date{
+  font-size:12px;
+  color:#98a2b3;
+  margin-right:10px;
+}
+
+.notice{
+  margin-top:30px;
+  padding:16px 18px;
+  background:#fff8e7;
+  border-left:4px solid #e5a50a;
+  border-radius:6px;
+  color:#66521b;
+  font-size:13px;
+  line-height:1.6;
+}
+
+footer{
+  text-align:center;
+  color:#98a2b3;
+  font-size:13px;
+  padding:35px 20px;
+}
+
+.hidden{
+  display:none;
+}
+
+@media(max-width:850px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:30px}
+}
+
+@media(max-width:560px){
+  .grid{grid-template-columns:1fr}
+  header{padding-top:32px}
+  h1{font-size:27px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+  <h1>경록's 시설 업무</h1>
+  <p class="subtitle">학교시설 업무자료 통합 포털</p>
+
+  <div class="search-wrap">
+    <input id="search"
+      type="text"
+      placeholder="업무, 법령, 설비명을 검색하세요. 예) 전기감리, BIPV, 수전용량">
+  </div>
+</div>
+</header>
+
+<main>
+
+<div class="section-title">업무 분야</div>
+
+<div class="grid" id="cards">
+
+<div class="card">
+<div class="icon">⚡</div>
+<h2>전기</h2>
+<p>수전설비, 용량증설, 전기안전관리, 배전반, 조명 및 전기차 충전시설</p>
+<span class="tag">수전용량</span>
+<span class="tag">한전 시설부담금</span>
+<span class="tag">사용전검사</span>
+</div>
+
+<div class="card">
+<div class="icon">📡</div>
+<h2>통신</h2>
+<p>정보통신공사, 방송설비, 네트워크 및 통신 설계·감리 업무</p>
+<span class="tag">RS-485</span>
+<span class="tag">정보통신</span>
+</div>
+
+<div class="card">
+<div class="icon">🔥</div>
+<h2>소방</h2>
+<p>자동화재탐지설비, 발신기, SVP, 유도등, 비상조명 및 소방시설</p>
+<span class="tag">발신기</span>
+<span class="tag">SVP</span>
+<span class="tag">비상조명</span>
+</div>
+
+<div class="card">
+<div class="icon">☀️</div>
+<h2>신재생에너지</h2>
+<p>태양광, BIPV, 구조검토, 신재생에너지 설치 및 전력거래</p>
+<span class="tag">태양광</span>
+<span class="tag">BIPV</span>
+<span class="tag">PPA</span>
+</div>
+
+<div class="card">
+<div class="icon">🏫</div>
+<h2>BTL</h2>
+<p>BTL 학교 운영, 공동시설점검, 하자관리 및 관리운영권 만료 업무</p>
+<span class="tag">시설점검</span>
+<span class="tag">하자관리</span>
+</div>
+
+<div class="card">
+<div class="icon">👷</div>
+<h2>설계 · 감리</h2>
+<p>전기감리 발주, 정액적산, 실비정액가산 및 감리원 배치</p>
+<span class="tag">전기감리</span>
+<span class="tag">감리대가</span>
+<span class="tag">배치계획</span>
+</div>
+
+<div class="card">
+<div class="icon">💰</div>
+<h2>계약 · 원가</h2>
+<p>원가계산, 제비율, 선금, 산업안전보건관리비, 설계변경 및 계약업무</p>
+<span class="tag">원가제비율</span>
+<span class="tag">선금</span>
+<span class="tag">설계변경</span>
+</div>
+
+<div class="card">
+<div class="icon">⚖️</div>
+<h2>법령 · 지침</h2>
+<p>시설업무 관련 법령, 행정규칙, 기술기준 및 경기도교육청 지침</p>
+<span class="tag">법령</span>
+<span class="tag">기술기준</span>
+<span class="tag">지침</span>
+</div>
+
+<div class="card">
+<div class="icon">📂</div>
+<h2>서식 · 자료실</h2>
+<p>계획안, 검토보고서, 공문, 체크리스트, 산출내역서 및 업무용 서식</p>
+<span class="tag">공문</span>
+<span class="tag">Excel</span>
+<span class="tag">체크리스트</span>
+</div>
+
+</div>
+
+<div class="section-title">최근 업데이트</div>
+
+<div class="update-box">
+
+<div class="update">
+<span class="date">준비중</span>
+전기감리 발주 및 대가산정 자료
+</div>
+
+<div class="update">
+<span class="date">준비중</span>
+BIPV 및 신재생에너지 업무자료
+</div>
+
+<div class="update">
+<span class="date">준비중</span>
+전기차 충전시설 설치 제외 업무자료
+</div>
+
+<div class="update">
+<span class="date">준비중</span>
+BTL 공동시설점검 업무자료
+</div>
+
+</div>
+
+<div class="notice">
+<strong>업무 활용 안내</strong><br>
+본 사이트의 자료는 시설업무의 효율적인 참고를 위해 정리한 자료입니다.
+실제 업무 적용 시에는 최신 법령, 행정규칙, 기술기준 및 관련 기관의 공식 지침을 반드시 확인하시기 바랍니다.
+</div>
+
+</main>
+
+<footer>
+경록's 시설 업무 · 학교시설 업무자료 통합 포털
+</footer>
+
+<script>
+const search = document.getElementById("search");
+const cards = document.querySelectorAll(".card");
+
+search.addEventListener("input", function(){
+  const keyword = this.value.toLowerCase().trim();
+
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+
+    if(text.includes(keyword)){
+      card.classList.remove("hidden");
+    }else{
+      card.classList.add("hidden");
+    }
+  });
+});
+</script>
+
+</body>
+</html>
