@@ -2,169 +2,129 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>전기감리 | 경록's 시설 업무</title>
+
+<!-- Excel 생성 라이브러리 -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <style>
 *{box-sizing:border-box}
 body{
-  margin:0;
-  font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
-  background:#f5f7fa;
-  color:#1f2937;
+ margin:0;
+ font-family:"Pretendard","Noto Sans KR",Arial,sans-serif;
+ background:#f5f7fa;
+ color:#1f2937
 }
 header{
-  background:linear-gradient(135deg,#17365d,#245a91);
-  color:white;
-  padding:30px 20px;
+ background:linear-gradient(135deg,#17365d,#245a91);
+ color:#fff;
+ padding:30px 20px
 }
-.header-inner{
-  max-width:1150px;
-  margin:auto;
+.wrap{max-width:1180px;margin:auto}
+.home{color:#dbeafe;text-decoration:none}
+h1{margin:12px 0 5px}
+main{max-width:1180px;margin:30px auto;padding:0 20px 60px}
+.box{
+ background:#fff;
+ border:1px solid #e5e7eb;
+ border-radius:14px;
+ margin-bottom:18px;
+ overflow:hidden
 }
-.home{
-  color:#dbeafe;
-  text-decoration:none;
-  font-size:14px;
+.title{
+ padding:17px 22px;
+ background:#f8fafc;
+ border-bottom:1px solid #e5e7eb;
+ font-weight:700;
+ font-size:19px
 }
-h1{
-  margin:14px 0 5px;
-  font-size:32px;
+.content{padding:22px}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:14px
 }
-.subtitle{
-  margin:0;
-  opacity:.9;
+.field label{
+ display:block;
+ font-size:13px;
+ font-weight:700;
+ margin-bottom:6px
 }
-main{
-  max-width:1150px;
-  margin:35px auto 70px;
-  padding:0 20px;
+input,select{
+ width:100%;
+ padding:11px;
+ border:1px solid #cfd6df;
+ border-radius:8px;
+ font-size:14px;
+ background:white
 }
-.summary{
-  background:white;
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  padding:25px;
-  margin-bottom:20px;
-}
-.summary h2{margin-top:0}
-.flow{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:20px;
-}
-.flow-box{
-  padding:18px;
-  text-align:center;
-  border-radius:10px;
-  background:#eef4fb;
-  color:#17365d;
-  font-weight:700;
-}
-.arrow{
-  color:#245a91;
-}
-.section{
-  background:white;
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  margin-top:18px;
-  overflow:hidden;
-}
-.section-title{
-  padding:18px 22px;
-  background:#f8fafc;
-  border-bottom:1px solid #e5e7eb;
-  font-size:20px;
-  font-weight:700;
-}
-.content{
-  padding:22px;
-  line-height:1.75;
-}
-.highlight{
-  background:#eff6ff;
-  border-left:4px solid #2563eb;
-  padding:15px 18px;
-  margin:15px 0;
-}
-.warning{
-  background:#fff8e7;
-  border-left:4px solid #e5a50a;
-  padding:15px 18px;
-  margin:15px 0;
-}
-.two{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.yellow{background:#fffbe6}
+.auto{
+ background:#eef6ff;
+ padding:16px;
+ border-left:4px solid #2563eb;
+ border-radius:7px;
+ margin-top:18px
 }
 .method{
-  border:1px solid #dbe2ea;
-  border-radius:10px;
-  padding:18px;
+ font-size:22px;
+ font-weight:800;
+ color:#17365d
 }
-.method h3{margin-top:0}
 table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:10px;
+ width:100%;
+ border-collapse:collapse;
+ margin-top:10px
 }
 th,td{
-  border:1px solid #e5e7eb;
-  padding:12px;
-  text-align:left;
-  vertical-align:top;
+ border:1px solid #e5e7eb;
+ padding:11px;
+ text-align:right
 }
 th{
-  background:#f8fafc;
+ background:#f8fafc;
+ text-align:center
 }
-.law{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 0;
-  border-bottom:1px solid #eee;
-  gap:15px;
+td:first-child{text-align:left}
+.total{
+ font-size:20px;
+ font-weight:800;
+ background:#eef4fb
 }
-.law:last-child{border-bottom:0}
-.btn{
-  display:inline-block;
-  background:#245a91;
-  color:white;
-  text-decoration:none;
-  padding:9px 14px;
-  border-radius:8px;
-  white-space:nowrap;
+.buttons{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:20px
 }
-.calc{
-  text-align:center;
-  padding:30px;
-  background:#17365d;
-  color:white;
+button{
+ border:0;
+ border-radius:9px;
+ padding:13px 20px;
+ font-size:15px;
+ font-weight:700;
+ cursor:pointer
 }
-.calc h2{margin-top:0}
-.calc-btn{
-  display:inline-block;
-  margin-top:8px;
-  padding:13px 25px;
-  background:white;
-  color:#17365d;
-  border-radius:9px;
-  font-weight:700;
+.calc{background:#245a91;color:white}
+.excel{background:#15803d;color:white}
+.reset{background:#e5e7eb}
+.note{
+ background:#fff8e7;
+ border-left:4px solid #e5a50a;
+ padding:14px;
+ margin-top:15px;
+ font-size:13px;
+ line-height:1.6
 }
-.small{
-  color:#667085;
-  font-size:13px;
+.sub{
+ font-size:14px;
+ color:#667085;
+ margin-top:4px
 }
-ul{
-  padding-left:22px;
-}
-@media(max-width:700px){
-  .flow,.two{grid-template-columns:1fr}
-  .law{display:block}
-  .law .btn{margin-top:10px}
+.hidden{display:none}
+@media(max-width:800px){
+ .grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -172,258 +132,1008 @@ ul{
 <body>
 
 <header>
-<div class="header-inner">
-<a class="home" href="index.html">← 경록's 시설 업무 홈</a>
-<h1>⚡ 전기감리</h1>
-<p class="subtitle">감리대상 판단 · 감리대가 산정 · 감리원 배치 · 관련 법령</p>
+<div class="wrap">
+<a href="index.html" class="home">← 경록's 시설 업무 홈</a>
+<h1>⚡ 전기감리 대가 산출</h1>
+<div>정액적산 · 실비정액가산 · 직접경비 · Excel 산출</div>
 </div>
 </header>
 
 <main>
 
-<div class="summary">
-<h2>전기감리 업무 한눈에 보기</h2>
-<p>
-전력시설물 공사의 감리대상 여부를 확인하고,
-해당 공사의 특성에 따라 감리원 배치 및 감리용역 대가를 산정하기 위한 업무자료입니다.
-</p>
+<div class="box">
+<div class="title">01. 현장정보 입력</div>
+<div class="content">
 
-<div class="flow">
-<div class="flow-box">① 감리대상 판단</div>
-<div class="flow-box">② 감리원 배치기준 확인</div>
-<div class="flow-box">③ 감리대가 산정</div>
+<div class="grid">
+
+<div class="field">
+<label>용역명</label>
+<input id="name" class="yellow" value="전기공사 감리용역">
+</div>
+
+<div class="field">
+<label>시설유형</label>
+<select id="type" class="yellow">
+<option>일반 건축물</option>
+<option>공동주택</option>
+<option>기타 특수시설</option>
+</select>
+</div>
+
+<div class="field">
+<label>공사 복잡도</label>
+<select id="complex" class="yellow">
+<option>단순공종</option>
+<option selected>보통공종</option>
+<option>복잡공종</option>
+</select>
+</div>
+
+<div class="field">
+<label>적용 연면적 (㎡)</label>
+<input id="area" class="yellow" type="number" value="0">
+</div>
+
+<div class="field">
+<label>공동주택 세대수</label>
+<input id="house" class="yellow" type="number" value="0">
+</div>
+
+<div class="field">
+<label>공사기간 (일)</label>
+<input id="days" class="yellow" type="number" value="365">
+</div>
+
+<div class="field">
+<label>전기공사 도급금액 (VAT 제외)</label>
+<input id="contract" class="yellow" type="number" value="0">
+</div>
+
+<div class="field">
+<label>도급자 설치 관급자재비</label>
+<input id="supply1" class="yellow" type="number" value="0">
+</div>
+
+<div class="field">
+<label>관급자 설치 관급자재비</label>
+<input id="supply2" class="yellow" type="number" value="0">
+</div>
+
+</div>
+
+<div class="auto">
+자동 판단 산정방식<br>
+<span id="method" class="method">-</span>
+<div class="sub" id="reason"></div>
+</div>
+
 </div>
 </div>
 
 
-<div class="section">
-<div class="section-title">01. 전기공사 감리대상 판단</div>
+<div class="box">
+<div class="title">02. 적용 기준</div>
+<div class="content">
+
+<div class="grid">
+
+<div class="field">
+<label>특급 노임단가</label>
+<input id="special" type="number" value="360108">
+</div>
+
+<div class="field">
+<label>고급 노임단가</label>
+<input id="high" type="number" value="311965">
+</div>
+
+<div class="field">
+<label>중급 노임단가</label>
+<input id="middle" type="number" value="300452">
+</div>
+
+<div class="field">
+<label>초급 노임단가</label>
+<input id="basic" type="number" value="248432">
+</div>
+
+<div class="field">
+<label>월평균 근무일수</label>
+<input id="workdays" type="number" step="0.1" value="20.3">
+</div>
+
+<div class="field">
+<label>비상주 지원비율 (%)</label>
+<input id="nonresident" type="number" value="10">
+</div>
+
+<div class="field">
+<label>제경비율 (%)</label>
+<input id="expenseRate" type="number" value="110">
+</div>
+
+<div class="field">
+<label>기술료율 (%)</label>
+<input id="techRate" type="number" value="20">
+</div>
+
+<div class="field">
+<label>공제료 산정 적용률 (%)</label>
+<input id="insuranceRate" type="number" value="100">
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<div id="actualBox" class="box hidden">
+
+<div class="title">03. 실비정액가산 추가 배치</div>
+
 <div class="content">
 
 <p>
-전력시설물 공사의 감리 적용 여부는 「전력기술관리법」 및 같은 법 시행령을 기준으로 판단합니다.
+책임감리원은 총 공사기간을 기준으로 자동 산정합니다.
+추가 보조감리원이 있는 경우 실제 배치 인·월을 입력합니다.
 </p>
 
-<div class="highlight">
-<strong>기본 판단</strong><br>
-전력시설물 공사 → 감리대상 여부 확인 → 시행령상 제외대상 확인 → 감리 발주 여부 결정
+<div class="grid">
+
+<div class="field">
+<label>보조감리원 1 등급</label>
+<select id="assistant1grade">
+<option>특급</option>
+<option selected>고급</option>
+<option>중급</option>
+<option>초급</option>
+</select>
 </div>
 
-<h3>시행령 제20조 주요 감리 예외</h3>
+<div class="field">
+<label>보조감리원 1 배치 인·월</label>
+<input id="assistant1month" type="number" step="0.01" value="0">
+</div>
 
-<ul>
-<li>일반용전기설비의 전력시설물공사</li>
-<li>임시전력을 공급받기 위한 전력시설물공사</li>
-<li>군사시설 내 전력시설물공사</li>
-<li>비상전원·비상조명등·비상콘센트설비 공사</li>
-<li>전기사업용전기설비 중 인입선 및 저압배전설비 공사</li>
-<li>일정 요건에 해당하는 전력시설물 보수공사</li>
-</ul>
+<div></div>
 
-<div class="warning">
-<strong>주의</strong><br>
-공사금액만으로 감리대상 여부를 단순 판단하지 말고,
-설비의 종류·전압·공사내용·자가용/일반용 여부와 시행령 제20조의 예외 규정을 함께 확인합니다.
+<div class="field">
+<label>보조감리원 2 등급</label>
+<select id="assistant2grade">
+<option>특급</option>
+<option selected>고급</option>
+<option>중급</option>
+<option>초급</option>
+</select>
+</div>
+
+<div class="field">
+<label>보조감리원 2 배치 인·월</label>
+<input id="assistant2month" type="number" step="0.01" value="0">
 </div>
 
 </div>
+
+</div>
 </div>
 
 
-<div class="section">
-<div class="section-title">02. 감리대가 산정방식</div>
+<div class="box">
+
+<div class="title">04. 직접경비 입력</div>
+
 <div class="content">
 
-<div class="two">
+<div class="grid">
 
-<div class="method">
-<h3>정액적산방식</h3>
-<p>
-「전력기술관리법 운영요령」 제24조에 따른
-공사감리용역대가의 기본 산정방식입니다.
-</p>
-
-<strong>주요 검토항목</strong>
-<ul>
-<li>전력시설물 공사비</li>
-<li>감리원수</li>
-<li>공사 복잡도</li>
-<li>감리원 등급</li>
-<li>직접경비</li>
-</ul>
+<div class="field">
+<label>차량 사용률 (%)</label>
+<input id="carRate" type="number" value="100">
 </div>
 
-<div class="method">
-<h3>실비정액가산방식</h3>
-<p>
-운영요령 제25조제2항에 따라 감리원을 배치하는
-일정 규모 이상의 공동주택 및 건축물 등에 적용됩니다.
-</p>
+<div class="field">
+<label>차량임대 일단가</label>
+<input id="carRental" type="number" value="0">
+</div>
 
-<strong>주요 검토항목</strong>
-<ul>
-<li>감리원 등급</li>
-<li>배치기간</li>
-<li>직접인건비</li>
-<li>제경비</li>
-<li>기술료</li>
-<li>직접경비</li>
-</ul>
+<div class="field">
+<label>유류비 일단가</label>
+<input id="fuel" type="number" value="0">
+</div>
+
+<div class="field">
+<label>현장운영 월기준액</label>
+<input id="office" type="number" value="0">
+</div>
+
+<div class="field">
+<label>도서인쇄 부당단가</label>
+<input id="printUnit" type="number" value="20000">
 </div>
 
 </div>
 
-<div class="highlight">
-<strong>핵심</strong><br>
-운영요령 제24조제1항은 정액적산방식을 원칙으로 하며,
-제25조제2항에 따라 감리원을 배치하는 경우에는
-실비정액가산방식으로 감리대가를 산출합니다.
+<div class="note">
+주재비는 상주 직접인건비의 30%, 출장여비는 비상주 직접인건비의
+10%로 자동 계산합니다. 도서인쇄 기본수량은 기존 산출서와 동일하게
+월간보고서 1부/월 + 최종보고서 2부 + 설계변경도서 2부를 적용합니다.
+</div>
+
+<div class="buttons">
+<button class="calc" onclick="calculate()">감리대가 계산</button>
+<button class="excel" onclick="downloadExcel()">Excel 산출서 다운로드</button>
+<button class="reset" onclick="location.reload()">초기화</button>
 </div>
 
 </div>
 </div>
 
 
-<div class="section">
-<div class="section-title">03. 감리원 배치기준</div>
+<div class="box">
+<div class="title">05. 산출 결과</div>
 <div class="content">
-
-<p>
-감리원 배치는 「전력기술관리법 운영요령」 제25조와
-별표 2 및 별표 2의2를 기준으로 검토합니다.
-</p>
 
 <table>
-<tr>
-<th>구분</th>
-<th>주요 내용</th>
-</tr>
-<tr>
-<td>책임감리원</td>
-<td>해당 공사의 감리업무를 총괄</td>
-</tr>
-<tr>
-<td>보조감리원</td>
-<td>책임감리원을 보좌하여 감리업무 수행</td>
-</tr>
-<tr>
-<td>상주감리원</td>
-<td>공사현장에 상주하여 감리업무 수행</td>
-</tr>
-<tr>
-<td>비상주감리원</td>
-<td>상주감리원의 업무를 지원하며 관련 기준에 따라 배치</td>
-</tr>
-</table>
+<tbody>
+<tr><th>산출항목</th><th>금액</th></tr>
 
-<div class="warning">
-실제 배치인원과 기간은 공사비, 공사기간, 건축물 규모,
-공사종류 및 별표의 배치기준을 확인하여 결정합니다.
-</div>
-
-</div>
-</div>
-
-
-<div class="section">
-<div class="section-title">04. 직접경비</div>
-<div class="content">
-
-<table>
 <tr>
-<th>항목</th>
-<th>검토 내용</th>
+<td>전력시설물공사비</td>
+<td id="rConstruction">0원</td>
 </tr>
+
+<tr>
+<td id="laborTitle">직접인건비</td>
+<td id="rLabor">0원</td>
+</tr>
+
+<tr>
+<td>제경비</td>
+<td id="rExpense">0원</td>
+</tr>
+
+<tr>
+<td>기술료</td>
+<td id="rTech">0원</td>
+</tr>
+
 <tr>
 <td>주재비</td>
-<td>현장 상주에 필요한 비용</td>
+<td id="rStay">0원</td>
 </tr>
+
 <tr>
 <td>출장여비</td>
-<td>비상주감리 등의 현장 출장 관련 비용</td>
+<td id="rTravel">0원</td>
 </tr>
+
 <tr>
 <td>도서인쇄비</td>
-<td>보고서 및 감리 관련 도서 작성·인쇄 비용</td>
+<td id="rPrint">0원</td>
 </tr>
+
 <tr>
 <td>현지차량비</td>
-<td>현장업무 수행을 위한 차량 관련 비용</td>
+<td id="rCar">0원</td>
 </tr>
+
 <tr>
 <td>현장운영경비</td>
-<td>사무용품, 통신 등 현장 운영에 필요한 비용</td>
+<td id="rOffice">0원</td>
 </tr>
+
 <tr>
-<td>손해배상보험료 등</td>
-<td>관련 기준에 따라 별도 검토</td>
+<td>직접경비 소계</td>
+<td id="rDirect">0원</td>
 </tr>
+
+<tr>
+<td>용역원가</td>
+<td id="rCost">0원</td>
+</tr>
+
+<tr>
+<td>손해배상보험(공제)료</td>
+<td id="rInsurance">0원</td>
+</tr>
+
+<tr>
+<td>공급가액</td>
+<td id="rSupply">0원</td>
+</tr>
+
+<tr>
+<td>부가가치세</td>
+<td id="rVat">0원</td>
+</tr>
+
+<tr class="total">
+<td>최종 감리용역비<br>(천원 미만 절사)</td>
+<td id="rTotal">0원</td>
+</tr>
+
+</tbody>
 </table>
 
-<p class="small">
-※ 실제 계상 시 최신 운영요령 및 관련 대가기준을 확인합니다.
-</p>
-
+<div id="detail" class="note">
+현장정보를 입력하고 「감리대가 계산」을 누르세요.
 </div>
-</div>
-
-
-<div class="section">
-<div class="section-title">05. 관련 법령 · 기준</div>
-<div class="content">
-
-<div class="law">
-<div>
-<strong>전력기술관리법</strong><br>
-<span class="small">공사감리의 기본 법적 근거</span>
-</div>
-<a class="btn"
-href="https://www.law.go.kr/법령/전력기술관리법"
-target="_blank">원문 보기</a>
-</div>
-
-<div class="law">
-<div>
-<strong>전력기술관리법 시행령 제20조</strong><br>
-<span class="small">공사감리 및 감리 제외대상 확인</span>
-</div>
-<a class="btn"
-href="https://www.law.go.kr/법령/전력기술관리법시행령"
-target="_blank">원문 보기</a>
-</div>
-
-<div class="law">
-<div>
-<strong>전력기술관리법 운영요령</strong><br>
-<span class="small">
-제24조 감리대가 · 제25조 감리원 배치기준 등
-</span>
-</div>
-<a class="btn"
-href="https://www.law.go.kr/행정규칙/전력기술관리법운영요령"
-target="_blank">원문 보기</a>
-</div>
-
-</div>
-</div>
-
-
-<div class="section">
-<div class="calc">
-
-<h2>📊 전기감리 대가 계산기</h2>
-
-<p>
-공사비·감리기간·감리원 등급 등을 입력하여<br>
-정액적산 및 실비정액가산 방식의 감리대가를 계산합니다.
-</p>
-
-<span class="calc-btn">계산기 준비중</span>
 
 </div>
 </div>
 
 </main>
+
+
+<script>
+
+/* -------------------------
+   기본 함수
+-------------------------- */
+
+const $ = id => document.getElementById(id);
+
+const n = id => Number($(id).value || 0);
+
+const won = x =>
+ Math.round(x).toLocaleString("ko-KR") + "원";
+
+const round = x => Math.round(x);
+
+const trunc1000 = x =>
+ Math.trunc(x / 1000) * 1000;
+
+function excelRound1(x){
+ return Math.round((x + Number.EPSILON) * 10) / 10;
+}
+
+function excelTrunc2(x){
+ return Math.trunc(x * 100) / 100;
+}
+
+
+/* -------------------------
+   별표2 정액적산 기준표
+-------------------------- */
+
+const fixedTable = [
+
+[0.05,.18,.19,.21],
+[0.1,.30,.33,.36],
+[0.2,.51,.56,.63],
+[0.3,.70,.78,.85],
+[0.4,.87,.96,1.10],
+[0.5,1.10,1.20,1.30],
+[0.6,1.20,1.30,1.50],
+[0.7,1.40,1.50,1.60],
+[0.8,1.50,1.60,1.80],
+[0.9,1.60,1.80,2.00],
+[1,1.80,1.90,2.10],
+[2,3.00,3.30,3.60],
+[3,4.10,4.60,5.00],
+[4,5.10,5.60,6.30],
+[5,6.10,6.70,7.40],
+[6,7.00,7.80,8.50],
+[7,7.90,8.70,9.60],
+[8,8.70,9.70,10.60],
+[9,9.60,10.60,11.70],
+[10,10.30,11.50,12.70],
+[20,17.70,19.60,21.60],
+[30,24.00,26.80,29.50],
+[40,30.10,33.40,36.70],
+[50,35.60,39.70,43.60],
+[70,46.20,51.40,56.50],
+[100,60.80,67.50,74.30],
+[200,103.60,115.10,126.60],
+[300,141.50,157.20,172.90],
+[400,176.60,196.10,215.80],
+[500,209.50,232.80,256.10]
+
+];
+
+
+/* -------------------------
+   산정방식 자동 판단
+-------------------------- */
+
+function determineMethod(){
+
+ const type = $("type").value;
+ const area = n("area");
+ const house = n("house");
+
+ let method;
+ let reason;
+
+ if(type === "기타 특수시설"){
+
+  method = "별도 검토";
+  reason = "특수시설은 개별 기준 확인이 필요합니다.";
+
+ }else if(type === "공동주택"){
+
+  if(house >= 300){
+
+   method = "실비정액가산방식";
+   reason = "공동주택 300세대 이상";
+
+  }else{
+
+   method = "정액적산방식";
+   reason = "공동주택 300세대 미만";
+
+  }
+
+ }else{
+
+  if(area >= 10000){
+
+   method = "실비정액가산방식";
+   reason = "건축물 연면적 10,000㎡ 이상";
+
+  }else{
+
+   method = "정액적산방식";
+   reason = "건축물 연면적 10,000㎡ 미만";
+
+  }
+
+ }
+
+ $("method").innerText = method;
+ $("reason").innerText = reason;
+
+ $("actualBox").classList.toggle(
+  "hidden",
+  method !== "실비정액가산방식"
+ );
+
+ return method;
+}
+
+
+/* -------------------------
+   정액적산 별표2 감리원수
+-------------------------- */
+
+function fixedInspectorCount(cost,complex){
+
+ if(cost <= 0) return 0;
+
+ const eok = cost / 100000000;
+
+ let col =
+  complex === "단순공종" ? 1 :
+  complex === "복잡공종" ? 3 : 2;
+
+ if(eok > 500){
+
+  let factor =
+   complex === "단순공종" ? .9 :
+   complex === "복잡공종" ? 1.1 : 1;
+
+  return excelRound1(
+   1.96 * Math.pow(eok,.769) * factor
+  );
+ }
+
+ if(eok <= fixedTable[0][0])
+  return fixedTable[0][col];
+
+ for(let i=0;i<fixedTable.length-1;i++){
+
+  const low = fixedTable[i];
+  const high = fixedTable[i+1];
+
+  if(eok === low[0])
+   return low[col];
+
+  if(eok >= low[0] && eok < high[0]){
+
+   const result =
+    low[col] +
+    (eok-low[0]) *
+    (high[col]-low[col]) /
+    (high[0]-low[0]);
+
+   return excelRound1(result);
+  }
+ }
+
+ return fixedTable[fixedTable.length-1][col];
+}
+
+
+/* -------------------------
+   책임감리원 등급
+-------------------------- */
+
+function responsibleGrade(cost){
+
+ if(cost >= 2000000000) return "특급";
+ if(cost >= 1000000000) return "고급";
+
+ return "중급";
+}
+
+function gradeRate(grade){
+
+ if(grade==="특급") return n("special");
+ if(grade==="고급") return n("high");
+ if(grade==="중급") return n("middle");
+
+ return n("basic");
+}
+
+
+/* -------------------------
+   손해배상공제료
+-------------------------- */
+
+const insuranceTable = [
+
+[0,500000000,.00565,.00090,3],
+[500000000,1000000000,.00549,.00087,3],
+[1000000000,2000000000,.00532,.00085,3],
+[2000000000,3000000000,.00515,.00083,3],
+[3000000000,5000000000,.00498,.00080,3]
+
+];
+
+function insurance(cost,days){
+
+ const applied =
+  cost * n("insuranceRate") / 100;
+
+ if(applied <= 0) return 0;
+
+ if(applied > 5000000000)
+  return 0;
+
+ let result = 0;
+
+ insuranceTable.forEach(r=>{
+
+  const start=r[0];
+  const end=r[1];
+  const basic=r[2];
+  const extra=r[3];
+  const standard=r[4]*365;
+
+  const amount =
+   Math.max(
+    Math.min(applied-start,end-start),
+    0
+   );
+
+  const rate =
+   basic +
+   extra *
+   Math.max(days-standard,0)/365;
+
+  result += amount * rate;
+
+ });
+
+ return trunc1000(result);
+}
+
+
+/* -------------------------
+   계산
+-------------------------- */
+
+let lastResult = null;
+
+function calculate(){
+
+ const method = determineMethod();
+
+ if(method === "별도 검토"){
+  alert("기타 특수시설은 자동 산출 대상에서 제외했습니다.");
+  return;
+ }
+
+ const construction =
+  n("contract") +
+  n("supply1") +
+  n("supply2");
+
+ if(construction <= 0){
+
+  alert("전력시설물공사비를 입력하세요.");
+  return;
+ }
+
+ const days=n("days");
+ const work=n("workdays");
+
+ const expenseRate=n("expenseRate")/100;
+ const techRate=n("techRate")/100;
+ const nonresident=n("nonresident")/100;
+
+ let residentLabor=0;
+ let assistantLabor=0;
+ let nonLabor=0;
+
+ let residentMonths=0;
+ let detailText="";
+
+
+ /* 정액적산 */
+
+ if(method==="정액적산방식"){
+
+  const inspectors =
+   fixedInspectorCount(
+    construction,
+    $("complex").value
+   );
+
+  const grade =
+   responsibleGrade(construction);
+
+  const high=n("high");
+
+  const gradeDaily=
+   gradeRate(grade);
+
+  const conversion =
+   Math.round(
+    gradeDaily/high*100
+   )/100;
+
+  residentMonths =
+   inspectors/conversion;
+
+  residentLabor =
+   round(
+    inspectors *
+    high *
+    work *
+    .80
+   );
+
+  nonLabor =
+   round(
+    residentLabor *
+    nonresident
+   );
+
+  detailText =
+   "별표2 고급기준 감리원수: "+
+   inspectors.toFixed(1)+"인·월 / "+
+   "책임감리원 등급: "+grade+
+   " / 등급환산비: "+
+   conversion.toFixed(2)+
+   " / 환산 배치일수: "+
+   Math.ceil(residentMonths*work)+"일";
+
+ }
+
+
+ /* 실비정액가산 */
+
+ else{
+
+  const grade =
+   responsibleGrade(construction);
+
+  residentMonths =
+   excelTrunc2(days/30);
+
+  residentLabor =
+   round(
+    residentMonths *
+    gradeRate(grade) *
+    work *
+    .90
+   );
+
+  const m1=n("assistant1month");
+  const m2=n("assistant2month");
+
+  assistantLabor =
+   round(
+    (
+     m1*gradeRate($("assistant1grade").value) +
+     m2*gradeRate($("assistant2grade").value)
+    ) *
+    work *
+    .90
+   );
+
+  nonLabor =
+   round(
+    (residentLabor+assistantLabor) *
+    nonresident
+   );
+
+  detailText =
+   "책임감리원: "+grade+
+   " / 책임 배치: "+
+   residentMonths.toFixed(2)+"인·월"+
+   " / 추가 보조: "+
+   (m1+m2).toFixed(2)+"인·월";
+
+ }
+
+
+ const labor =
+  residentLabor +
+  assistantLabor +
+  nonLabor;
+
+
+ const expense =
+  round(labor*expenseRate);
+
+ const tech =
+  round((labor+expense)*techRate);
+
+
+ /* 직접경비 */
+
+ const stay =
+  round(
+   (residentLabor+assistantLabor)*.30
+  );
+
+ const travel =
+  round(nonLabor*.10);
+
+ const carDays =
+  Math.ceil(
+   residentMonths *
+   work *
+   n("carRate")/100
+  );
+
+ const car =
+  carDays *
+  (n("carRental")+n("fuel"));
+
+ const operatingMonths =
+  Math.ceil(residentMonths);
+
+ const office =
+  operatingMonths*n("office");
+
+ const printQty =
+  operatingMonths + 4;
+
+ const print =
+  printQty*n("printUnit");
+
+ const direct =
+  stay+
+  travel+
+  car+
+  office+
+  print;
+
+
+ const serviceCost =
+  labor+
+  expense+
+  tech+
+  direct;
+
+
+ const insuranceCost =
+  insurance(serviceCost,days);
+
+ const supply =
+  serviceCost+
+  insuranceCost;
+
+ const vat =
+  round(supply*.10);
+
+ const total =
+  trunc1000(supply+vat);
+
+
+ /* 화면 출력 */
+
+ $("rConstruction").innerText=won(construction);
+ $("rLabor").innerText=won(labor);
+ $("rExpense").innerText=won(expense);
+ $("rTech").innerText=won(tech);
+ $("rStay").innerText=won(stay);
+ $("rTravel").innerText=won(travel);
+ $("rPrint").innerText=won(print);
+ $("rCar").innerText=won(car);
+ $("rOffice").innerText=won(office);
+ $("rDirect").innerText=won(direct);
+ $("rCost").innerText=won(serviceCost);
+ $("rInsurance").innerText=won(insuranceCost);
+ $("rSupply").innerText=won(supply);
+ $("rVat").innerText=won(vat);
+ $("rTotal").innerText=won(total);
+
+ $("detail").innerHTML=
+  "<strong>"+method+"</strong><br>"+
+  detailText+
+  "<br>차량사용일수: "+
+  carDays+"일 / 현장운영개월: "+
+  operatingMonths+"개월";
+
+
+ lastResult={
+
+  용역명:$("name").value,
+  산정방식:method,
+  시설유형:$("type").value,
+  연면적:n("area"),
+  공사기간:days,
+  전력시설물공사비:construction,
+
+  직접인건비:labor,
+  제경비:expense,
+  기술료:tech,
+
+  주재비:stay,
+  출장여비:travel,
+  도서인쇄비:print,
+  현지차량비:car,
+  현장운영경비:office,
+
+  직접경비합계:direct,
+  용역원가:serviceCost,
+  손해배상공제료:insuranceCost,
+  공급가액:supply,
+  부가가치세:vat,
+  최종감리용역비:total,
+
+  산출근거:detailText
+
+ };
+
+}
+
+
+/* -------------------------
+   Excel 다운로드
+-------------------------- */
+
+function downloadExcel(){
+
+ calculate();
+
+ if(!lastResult) return;
+
+ const inputData=[
+
+  ["전기공사 감리용역 산출서"],
+  [],
+  ["구분","입력값"],
+
+  ["용역명",lastResult.용역명],
+  ["산정방식",lastResult.산정방식],
+  ["시설유형",lastResult.시설유형],
+  ["적용 연면적(㎡)",lastResult.연면적],
+  ["공사기간(일)",lastResult.공사기간],
+  ["전력시설물공사비",lastResult.전력시설물공사비],
+
+  [],
+  ["2026 노임단가","원/일"],
+  ["특급",n("special")],
+  ["고급",n("high")],
+  ["중급",n("middle")],
+  ["초급",n("basic")],
+
+  [],
+  ["산출근거",lastResult.산출근거]
+
+ ];
+
+
+ const resultData=[
+
+  ["감리용역비 산출결과"],
+  [],
+  ["산출항목","금액(원)"],
+
+  ["직접인건비",lastResult.직접인건비],
+  ["제경비",lastResult.제경비],
+  ["기술료",lastResult.기술료],
+
+  ["주재비",lastResult.주재비],
+  ["출장여비",lastResult.출장여비],
+  ["도서인쇄비",lastResult.도서인쇄비],
+  ["현지차량비",lastResult.현지차량비],
+  ["현장운영경비",lastResult.현장운영경비],
+
+  ["직접경비 합계",lastResult.직접경비합계],
+
+  ["용역원가",lastResult.용역원가],
+  ["손해배상보험(공제)료",lastResult.손해배상공제료],
+
+  ["공급가액",lastResult.공급가액],
+  ["부가가치세",lastResult.부가가치세],
+
+  ["최종 감리용역비",lastResult.최종감리용역비]
+
+ ];
+
+
+ const wb =
+  XLSX.utils.book_new();
+
+ const ws1 =
+  XLSX.utils.aoa_to_sheet(inputData);
+
+ const ws2 =
+  XLSX.utils.aoa_to_sheet(resultData);
+
+
+ ws1["!cols"]=[
+  {wch:25},
+  {wch:55}
+ ];
+
+ ws2["!cols"]=[
+  {wch:30},
+  {wch:22}
+ ];
+
+
+ XLSX.utils.book_append_sheet(
+  wb,
+  ws1,
+  "현장정보"
+ );
+
+ XLSX.utils.book_append_sheet(
+  wb,
+  ws2,
+  "감리대가산출"
+ );
+
+
+ let filename =
+  $("name").value
+  .replace(/[\\/:*?"<>|]/g,"_");
+
+ if(!filename)
+  filename="전기감리용역";
+
+
+ XLSX.writeFile(
+  wb,
+  filename+"_감리대가산출.xlsx"
+ );
+
+}
+
+
+/* 입력 변경시 자동 판단 */
+
+[
+ "type",
+ "area",
+ "house"
+].forEach(id=>{
+
+ $(id).addEventListener(
+  "input",
+  determineMethod
+ );
+
+ $(id).addEventListener(
+  "change",
+  determineMethod
+ );
+
+});
+
+
+determineMethod();
+
+</script>
 
 </body>
 </html>
